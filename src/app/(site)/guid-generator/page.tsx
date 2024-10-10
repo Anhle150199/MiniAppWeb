@@ -1,11 +1,35 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { GuidGenerator } from "@/components/GuidGenerator";
+import { GuidGenerator } from "@/components/Tools/GuidGenerator";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:
-    "About Us | Play SaaS Starter Kit and Boilerplate for Next.js",
-  description: "This is About page description",
+  title: 'Bulk GUID Generator and Validator - Create Unique Identifiers',
+  description: 'Generate and validate GUIDs (Globally Unique Identifiers) with customizable options. Learn more about GUIDs, their uniqueness, and their uses in software development.',
+  keywords: ['GUID generator', 'UUID generator', 'bulk GUID generation', 'GUID validator', 'Globally Unique Identifier', 'generate GUIDs online', 'validate GUIDs'],
+  alternates: {
+    canonical: 'https://yourdomain.com/guid-generator',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://yourdomain.com/guid-generator',
+    title: 'Bulk GUID Generator and Validator',
+    description: 'Easily generate and validate GUIDs online. Customize GUIDs with hyphens, braces, and more.',
+    images: [
+      {
+        url: 'https://yourdomain.com/images/guid-generator-og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Bulk GUID Generator and Validator',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@YourTwitterHandle',
+    title: 'Bulk GUID Generator and Validator',
+    description: 'Easily generate and validate GUIDs online. Customize GUIDs with hyphens, braces, and more.',
+    images: ['https://yourdomain.com/images/guid-generator-twitter-image.jpg'],
+  },
 };
 
 const AboutPage = () => {
