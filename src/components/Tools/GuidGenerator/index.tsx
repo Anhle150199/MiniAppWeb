@@ -1,7 +1,11 @@
 "use client"
 import { useState, useEffect } from "react";
-import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { v4 as uuidv4, validate as uuidValidate, NIL as NIL_UUID, MAX as MAX_UUID, v7 as uuidv7 } from 'uuid';
 
+const uuidVersions = {
+  v4: 4,
+  v7: 7
+}
 export const GuidGenerator = () => {
   // states
   const [numberGuid, setNumberGuid] = useState<number>(1);
@@ -14,6 +18,7 @@ export const GuidGenerator = () => {
   })
   const [guidsList, setGuidsList] = useState<string[]>([])
   const [guidCheck, setGuidCheck] = useState<string>('')
+  const [guidType, setGuidType] = useState<number>(uuidVersions.v7);
 
   // functions
   const onChangeInputNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,8 +33,12 @@ export const GuidGenerator = () => {
   }
   const generateGuids = () => {
     let guids: string[] = [];
+    let uuidCreateFunc: Function = uuidv7;
+    if (guidType === uuidVersions.v4) {
+      uuidCreateFunc = uuidv4;
+    }
     for (let index = 0; index < numberGuid; index++) {
-      guids.push(uuidv4());
+      guids.push(uuidCreateFunc());
       if (!options.Hyphens) {
         guids[index] = guids[index]?.replaceAll('-', '');
       }
@@ -91,6 +100,7 @@ export const GuidGenerator = () => {
   }
   useEffect(() => {
     generateGuids();
+
   }, []);
   return (
     <section
@@ -155,12 +165,21 @@ export const GuidGenerator = () => {
                     </div>
                   </div>
                 </div>
-                <button
-                  onClick={generateGuids}
-                  className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-2 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
-                >
-                  Generate GUIDs
-                </button>
+                <div className='relative z-20 flex-shrink-0 inline-flex'>
+                  <select value={guidType} onChange={event => {
+                    setGuidType(parseInt(event?.target.value))
+                  }} className='flex-shrink-0 z-10 inline-flex items-center py-2 px-2 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600'>
+                    {Object.values(uuidVersions).map(item => <option key={item} value={item} className='dark:bg-dark-2' >UUID v{item}</option>)}
+                  </select>
+                  <button
+                    onClick={generateGuids}
+                    className="z-20 inline-flex items-center justify-center rounded-e-lg bg-primary ps-2 pr-5 py-2 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
+                  >
+                    Generate GUIDs
+                  </button>
+                </div>
+
+                {/* </div> */}
               </div>
             </div>
             <div className="w-full px-4 lg:w-1/2">
@@ -179,9 +198,9 @@ export const GuidGenerator = () => {
                     <i className="bi bi-cloud-download"></i> <span>Download file</span>
                   </button>
                 </div>
-                <div className="w-full flex flex-col gap-1 px-2 sm:px-4 lg:px-2 xl:px-4 py-2 h-48 rounded-lg overflow-auto bg-slate-200">
-                  {guidsList.map((guid) => (<div key={guid} className="flex items-center gap-2  rounded-md hover:bg-white" onClick={() => { copyToClipboard(guid) }}>
-                    <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 "  ></i>
+                <div className="w-full flex flex-col gap-1 px-2 sm:px-4 lg:px-2 xl:px-4 py-2 h-48 rounded-lg overflow-auto bg-slate-200 dark:bg-gray-700">
+                  {guidsList.map((guid) => (<div key={guid} className="flex items-center gap-2  rounded-md hover:bg-white hover:dark:bg-gray-500" onClick={() => { copyToClipboard(guid) }}>
+                    <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600"  ></i>
                     <span>{guid}</span>
                   </div>))}
                 </div>
@@ -190,8 +209,12 @@ export const GuidGenerator = () => {
           </div>
           <div className="w-full -mx-4 flex flex-wrap items-start my-10">
             <div className=" md:w-1/2 px-4 mb-12 lg:mb-0">
-              <h1 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]">
 
+              <div className="w-full flex flex-col gap-3 my-5">
+                <span className="text-start "><strong>Nil/Empty UUID:</strong> {NIL_UUID} <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600"  onClick={() => { copyToClipboard(NIL_UUID) }}></i></span>
+                <span className="text-start "><strong>Max UUID:</strong> {MAX_UUID} <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600"  onClick={() => { copyToClipboard(MAX_UUID) }}></i></span>
+              </div>
+              <h1 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]">
                 GUID checker</h1>
               <div className="w-full flex gap-3">
                 <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
@@ -212,10 +235,9 @@ export const GuidGenerator = () => {
                 <span className="font-bold text-start ">Result: </span>
                 <span id='checkresult'></span>
               </div>
-
             </div>
             <div className=" md:w-1/2 px-4 mb-12  lg:mb-0">
-                  {/* TODO: ADS */}
+              {/* TODO: ADS */}
             </div>
           </div>
           <hr />
@@ -239,6 +261,7 @@ export const GuidGenerator = () => {
           <hr />
         </div>
       </div>
+
     </section>
   );
 };

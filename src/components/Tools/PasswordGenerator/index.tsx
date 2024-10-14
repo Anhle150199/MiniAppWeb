@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
-export const GuidGenerator = () => {
+export const PasswordGenerator = () => {
   // states
   const [numberGuid, setNumberGuid] = useState<number>(1);
   const [options, setOptions] = useState({
