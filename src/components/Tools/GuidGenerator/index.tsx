@@ -1,11 +1,22 @@
 "use client"
 import { useState, useEffect } from "react";
 import { v4 as uuidv4, validate as uuidValidate, NIL as NIL_UUID, MAX as MAX_UUID, v7 as uuidv7 } from 'uuid';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const uuidVersions = {
   v4: 4,
   v7: 7
 }
+
+const tooltips = {
+  Hyphens: "Include hyphens in the GUID format",
+  Braces: "Wrap GUIDs with braces { }",
+  Uppercase: "Convert all GUID characters to uppercase",
+  Quotes: "Wrap GUIDs with double quotes \" \"",
+  Commas: "Separate multiple GUIDs with commas"
+};
+
 export const GuidGenerator = () => {
   // states
   const [numberGuid, setNumberGuid] = useState<number>(1);
@@ -19,6 +30,7 @@ export const GuidGenerator = () => {
   const [guidsList, setGuidsList] = useState<string[]>([])
   const [guidCheck, setGuidCheck] = useState<string>('')
   const [guidType, setGuidType] = useState<number>(uuidVersions.v7);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // functions
   const onChangeInputNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,32 +43,49 @@ export const GuidGenerator = () => {
       setNumberGuid(inputVal)
     }
   }
-  const generateGuids = () => {
-    let guids: string[] = [];
-    let uuidCreateFunc: Function = uuidv7;
-    if (guidType === uuidVersions.v4) {
-      uuidCreateFunc = uuidv4;
+  const generateGuids = async () => {
+    setLoading(true); // Bắt đầu quá trình tạo GUID
+    try {
+      // Chờ một chút để mô phỏng thời gian tạo GUIDs
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          let guids: string[] = [];
+          let uuidCreateFunc: Function = uuidv7; // Mặc định sử dụng uuidv7
+          if (guidType === uuidVersions.v4) {
+            uuidCreateFunc = uuidv4; // Thay đổi hàm tạo GUID nếu cần
+          }
+
+          // Tạo GUIDs và xử lý theo các tùy chọn
+          for (let index = 0; index < numberGuid; index++) {
+            let newGuid = uuidCreateFunc();
+            if (!options.Hyphens) {
+              newGuid = newGuid.replaceAll('-', '');
+            }
+            if (options.Braces) {
+              newGuid = `{${newGuid}}`;
+            } else if (options.Quotes) {
+              newGuid = `"${newGuid}"`;
+            }
+            if (options.Commas) {
+              newGuid += ",";
+            }
+            if (options.Uppercase) {
+              newGuid = newGuid.toUpperCase();
+            }
+            guids.push(newGuid);
+          }
+
+          setGuidsList(guids); // Cập nhật danh sách GUIDs
+          resolve(); // Gọi resolve để đánh dấu hoàn thành
+        }, 300); // Mô phỏng thời gian chờ
+      });
+    } catch (error) {
+      console.error('Error generating GUIDs:', error);
+    } finally {
+      setLoading(false); // Đặt loading là false sau khi hoàn thành
     }
-    for (let index = 0; index < numberGuid; index++) {
-      guids.push(uuidCreateFunc());
-      if (!options.Hyphens) {
-        guids[index] = guids[index]?.replaceAll('-', '');
-      }
-      if (options.Braces) {
-        guids[index] = `{${guids[index]}}`;
-      }
-      else if (options.Quotes) {
-        guids[index] = `"${guids[index]}"`;
-      }
-      if (options.Commas) {
-        guids[index] = guids[index] + ",";
-      }
-      if (options.Uppercase) {
-        guids[index] = guids[index]?.toUpperCase();
-      }
-    }
-    setGuidsList(guids);
-  }
+  };
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
       console.log("Text copied to clipboard!");
@@ -102,6 +131,10 @@ export const GuidGenerator = () => {
     generateGuids();
 
   }, []);
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
+
   return (
     <section
       id="GuidGenerator"
@@ -136,32 +169,29 @@ export const GuidGenerator = () => {
                     <div className="md:w-1/6">
                       <label className="block text-gray-500 font-bold md:text-start mb-1 md:mb-0 pr-4" htmlFor="guid-number">Format:</label>
                     </div>
-                    <div className="w-full flex flex-wrap items-center">
-                      <div className="flex  justify-start m-2 items-center ">
-                        <input id="Hyphens" type="checkbox" className="w-4 h-4 text-blue-800 focus:ring-red-500 focus:ring-2"
-                          checked={options.Hyphens} onChange={() => setOptions({ ...options, Hyphens: !options.Hyphens })} />
-                        <label htmlFor="Hyphens" className="ms-2 text-sm font-medium">Hyphens</label>
-                      </div>
-                      <div className="flex justify-start m-2 items-center">
-                        <input id="Braces" type="checkbox" className="w-4 h-4 text-blue-800 focus:ring-red-500 focus:ring-2"
-                          checked={options.Braces} onChange={() => setOptions({ ...options, Braces: !options.Braces })} />
-                        <label htmlFor="Braces" className="ms-2 text-sm font-medium">{`{} Braces`}</label>
-                      </div>
-                      <div className="flex justify-start m-2 items-center">
-                        <input id="Uppercase" type="checkbox" className="w-4 h-4 text-blue-800 focus:ring-red-500 focus:ring-2"
-                          checked={options.Uppercase} onChange={() => setOptions({ ...options, Uppercase: !options.Uppercase })} />
-                        <label htmlFor="Uppercase" className="ms-2 text-sm font-medium">Uppercase</label>
-                      </div>
-                      <div className="flex justify-start m-2 items-center">
-                        <input id="Quotes" type="checkbox" className="w-4 h-4 text-blue-800 focus:ring-red-500 focus:ring-2"
-                          checked={options.Quotes} onChange={() => setOptions({ ...options, Quotes: !options.Quotes })} />
-                        <label htmlFor="Quotes" className="ms-2 text-sm font-medium">{`" " Quotes`}</label>
-                      </div>
-                      <div className="flex justify-start m-2 items-center">
-                        <input id="Commas" type="checkbox" className="w-4 h-4 text-blue-800 focus:ring-red-500 focus:ring-2"
-                          checked={options.Commas} onChange={() => setOptions({ ...options, Commas: !options.Commas })} />
-                        <label htmlFor="Commas" className="ms-2 text-sm font-medium">{`, Commas`}</label>
-                      </div>
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      {Object.keys(options).map((key) => (
+                        <label key={key} className="flex items-center space-x-2 cursor-pointer">
+                          <input
+                            id={key}
+                            type="checkbox"
+                            className="h-4 w-4 text-blue-800 focus:ring-2 focus:ring-red-500"
+                            checked={options[key as keyof typeof options]}
+                            onChange={() =>
+                              setOptions({
+                                ...options,
+                                [key as keyof typeof options]: !options[key as keyof typeof options],
+                              })
+                            }
+                            data-tooltip-id={`guid-tooltip${key}`}
+                            data-tooltip-content={tooltips[key as keyof typeof tooltips]}
+                          />
+                          <span className="text-sm font-medium"
+                            data-tooltip-id={`guid-tooltip${key}`}
+                            data-tooltip-content={tooltips[key as keyof typeof tooltips]} >{key}</span>
+                          <Tooltip id={`guid-tooltip${key}`} place="top" className="z-50" />
+                        </label>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -173,9 +203,11 @@ export const GuidGenerator = () => {
                   </select>
                   <button
                     onClick={generateGuids}
+                    disabled={loading}
                     className="z-20 inline-flex items-center justify-center rounded-e-lg bg-primary ps-2 pr-5 py-2 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
                   >
-                    Generate GUIDs
+                    {loading ? <span className="px-3">Loading...</span> : <span>Generate GUIDs</span>}
+
                   </button>
                 </div>
 
@@ -208,11 +240,11 @@ export const GuidGenerator = () => {
             </div>
           </div>
           <div className="w-full -mx-4 flex flex-wrap items-start my-10">
-            <div className=" md:w-1/2 px-4 mb-12 lg:mb-0">
+            <div className=" lg:w-1/2 px-4 mb-12 lg:mb-0">
 
               <div className="w-full flex flex-col gap-3 my-5">
-                <span className="text-start "><strong>Nil/Empty UUID:</strong> {NIL_UUID} <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600"  onClick={() => { copyToClipboard(NIL_UUID) }}></i></span>
-                <span className="text-start "><strong>Max UUID:</strong> {MAX_UUID} <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600"  onClick={() => { copyToClipboard(MAX_UUID) }}></i></span>
+                <span className="text-start "><strong>Nil/Empty UUID:</strong> {NIL_UUID} <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600" onClick={() => { copyToClipboard(NIL_UUID) }}></i></span>
+                <span className="text-start "><strong>Max UUID:</strong> {MAX_UUID} <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600" onClick={() => { copyToClipboard(MAX_UUID) }}></i></span>
               </div>
               <h1 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]">
                 GUID checker</h1>
@@ -236,7 +268,7 @@ export const GuidGenerator = () => {
                 <span id='checkresult'></span>
               </div>
             </div>
-            <div className=" md:w-1/2 px-4 mb-12  lg:mb-0">
+            <div className=" lg:w-1/2 px-4 mb-12  lg:mb-0">
               {/* TODO: ADS */}
             </div>
           </div>

@@ -4,10 +4,10 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer
-      className="wow fadeInUp relative z-10 bg-[#090E34] pt-20 lg:pt-[100px]"
+      className="wow fadeInUp relative z-10 bg-[#090E34]"
       data-wow-delay=".15s"
     >
-      <div className="container">
+      {/* <div className="container">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12">
             <div className="mb-10 w-full">
@@ -257,9 +257,9 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> 
         </div>
-      </div>
+      </div>*/}
 
       <div className="mt-12 border-t border-[#8890A4] border-opacity-40 py-8 lg:mt-[60px]">
         <div className="container">
@@ -273,12 +273,12 @@ const Footer = () => {
                   >
                     Privacy policy
                   </a>
-                  <a
+                  {/* <a
                     href="/#"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     Legal notice
-                  </a>
+                  </a> */}
                   <a
                     href="/#"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
@@ -291,15 +291,15 @@ const Footer = () => {
             <div className="w-full px-4 md:w-1/3 lg:w-1/2">
               <div className="my-1 flex justify-center md:justify-end">
                 <p className="text-base text-gray-7">
-                  Designed and Developed by{" "}
-                  <a
+                  Developed by Zane Lee
+                  {/* <a
                     href="https://tailgrids.com"
                     rel="nofollow noopner noreferrer"
                     target="_blank"
                     className="text-gray-1 hover:underline"
                   >
                     TailGrids and Next.js Templates
-                  </a>
+                  </a> */}
                 </p>
               </div>
             </div>
@@ -307,7 +307,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <span className="absolute left-0 top-0 z-[-1] aspect-[95/82] w-full max-w-[570px]">
           <Image src="/images/footer/shape-1.svg" alt="shape" fill />
         </span>
@@ -571,7 +571,7 @@ const Footer = () => {
             ></path>
           </svg>
         </span>
-      </div>
+      </div> */}
     </footer>
   );
 };
