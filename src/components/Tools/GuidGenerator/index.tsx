@@ -46,16 +46,14 @@ export const GuidGenerator = () => {
   const generateGuids = async () => {
     setLoading(true); // Bắt đầu quá trình tạo GUID
     try {
-      // Chờ một chút để mô phỏng thời gian tạo GUIDs
       await new Promise<void>((resolve) => {
         setTimeout(() => {
           let guids: string[] = [];
-          let uuidCreateFunc: Function = uuidv7; // Mặc định sử dụng uuidv7
+          let uuidCreateFunc: Function = uuidv7;
           if (guidType === uuidVersions.v4) {
-            uuidCreateFunc = uuidv4; // Thay đổi hàm tạo GUID nếu cần
+            uuidCreateFunc = uuidv4;
           }
 
-          // Tạo GUIDs và xử lý theo các tùy chọn
           for (let index = 0; index < numberGuid; index++) {
             let newGuid = uuidCreateFunc();
             if (!options.Hyphens) {
@@ -75,14 +73,14 @@ export const GuidGenerator = () => {
             guids.push(newGuid);
           }
 
-          setGuidsList(guids); // Cập nhật danh sách GUIDs
-          resolve(); // Gọi resolve để đánh dấu hoàn thành
-        }, 300); // Mô phỏng thời gian chờ
+          setGuidsList(guids);
+          resolve();
+        }, 300);
       });
     } catch (error) {
       console.error('Error generating GUIDs:', error);
     } finally {
-      setLoading(false); // Đặt loading là false sau khi hoàn thành
+      setLoading(false);
     }
   };
 
@@ -204,9 +202,12 @@ export const GuidGenerator = () => {
                   <button
                     onClick={generateGuids}
                     disabled={loading}
+                    data-tooltip-id="guid-tooltipGenerateGUIDs"
+                    data-tooltip-content="Click to Generate GUIDs"
                     className="z-20 inline-flex items-center justify-center rounded-e-lg bg-primary ps-2 pr-5 py-2 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
                   >
                     {loading ? <span className="px-3">Loading...</span> : <span>Generate GUIDs</span>}
+                    <Tooltip id={`guid-tooltipGenerateGUIDs`} place="top" className="z-50" />
 
                   </button>
                 </div>
@@ -273,7 +274,7 @@ export const GuidGenerator = () => {
             </div>
           </div>
           <hr />
-          <div>
+          <div className="mb-4">
             <h2 className="my-3 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]">What is a GUID?</h2>
             <p>{`GUID (aka UUID) is an acronym for 'Globally Unique Identifier' (or 'Universally Unique Identifier'). It is a 128-bit integer number used to identify resources. The term GUID is generally used by developers working with Microsoft technologies, while UUID is used commonly used elsewhere.`}</p>
             <h2 className="my-3 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]">How are GUIDs used?</h2>
