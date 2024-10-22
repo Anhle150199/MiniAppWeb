@@ -1,8 +1,9 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { v4 as uuidv4, validate as uuidValidate, NIL as NIL_UUID, MAX as MAX_UUID, v7 as uuidv7 } from 'uuid';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+import toast from "react-hot-toast";
 
 const uuidVersions = {
   v4: 4,
@@ -30,7 +31,7 @@ export const GuidGenerator = () => {
   const [guidsList, setGuidsList] = useState<string[]>([])
   const [guidCheck, setGuidCheck] = useState<string>('')
   const [guidType, setGuidType] = useState<number>(uuidVersions.v7);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // functions
   const onChangeInputNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,51 +45,38 @@ export const GuidGenerator = () => {
     }
   }
   const generateGuids = async () => {
-    setLoading(true); // Bắt đầu quá trình tạo GUID
-    try {
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          let guids: string[] = [];
-          let uuidCreateFunc: Function = uuidv7;
-          if (guidType === uuidVersions.v4) {
-            uuidCreateFunc = uuidv4;
-          }
-
-          for (let index = 0; index < numberGuid; index++) {
-            let newGuid = uuidCreateFunc();
-            if (!options.Hyphens) {
-              newGuid = newGuid.replaceAll('-', '');
-            }
-            if (options.Braces) {
-              newGuid = `{${newGuid}}`;
-            } else if (options.Quotes) {
-              newGuid = `"${newGuid}"`;
-            }
-            if (options.Commas) {
-              newGuid += ",";
-            }
-            if (options.Uppercase) {
-              newGuid = newGuid.toUpperCase();
-            }
-            guids.push(newGuid);
-          }
-
-          setGuidsList(guids);
-          resolve();
-        }, 300);
-      });
-    } catch (error) {
-      console.error('Error generating GUIDs:', error);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        const uuidCreateFunc = guidType === uuidVersions.v4 ? uuidv4 : uuidv7;
+        const guids = Array.from({ length: numberGuid }, () => {
+          let guid = uuidCreateFunc();
+          if (!options.Hyphens) guid = guid.replace(/-/g, '');
+          if (options.Braces) guid = `{${guid}}`;
+          if (options.Quotes) guid = `"${guid}"`;
+          if (options.Commas) guid += ",";
+          return options.Uppercase ? guid.toUpperCase() : guid;
+        });
+        setGuidsList(guids);
+        resolve();
+      }, 300);
+    });
+    setLoading(false);
   };
 
+  const handleCheckboxChange = (key: string) => {
+    setOptions((prevOptions) => ({
+      ...prevOptions,
+      [key]: !prevOptions[key as keyof typeof prevOptions],
+    }));
+  };
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
-      console.log("Text copied to clipboard!");
+      toast.success('Successfully copied!');
     }).catch(err => {
-      console.error("Failed to copy text: ", err);
+      toast.success('Failed to copy. Try latter!');
+
+      console.error("Failed to copy: ", err);
     });
   }
   const copyAllGuids = () => {
@@ -127,11 +115,7 @@ export const GuidGenerator = () => {
   }
   useEffect(() => {
     generateGuids();
-
   }, []);
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
 
   return (
     <section
@@ -175,12 +159,7 @@ export const GuidGenerator = () => {
                             type="checkbox"
                             className="h-4 w-4 text-blue-800 focus:ring-2 focus:ring-red-500"
                             checked={options[key as keyof typeof options]}
-                            onChange={() =>
-                              setOptions({
-                                ...options,
-                                [key as keyof typeof options]: !options[key as keyof typeof options],
-                              })
-                            }
+                            onChange={() =>handleCheckboxChange(key)}
                             data-tooltip-id={`guid-tooltip${key}`}
                             data-tooltip-content={tooltips[key as keyof typeof tooltips]}
                           />
@@ -206,7 +185,7 @@ export const GuidGenerator = () => {
                     data-tooltip-content="Click to Generate GUIDs"
                     className="z-20 inline-flex items-center justify-center rounded-e-lg bg-primary ps-2 pr-5 py-2 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
                   >
-                    {loading ? <span className="px-3">Loading...</span> : <span>Generate GUIDs</span>}
+                    {loading ? <span className="px-3">Loading...</span> : <span>Generate GUID/UUID</span>}
                     <Tooltip id={`guid-tooltipGenerateGUIDs`} place="top" className="z-50" />
 
                   </button>
@@ -248,7 +227,7 @@ export const GuidGenerator = () => {
                 <span className="text-start "><strong>Max UUID:</strong> {MAX_UUID} <i className="bi bi-copy cursor-pointer p-1 px-2 rounded-md hover:bg-slate-300 hover:dark:bg-gray-600" onClick={() => { copyToClipboard(MAX_UUID) }}></i></span>
               </div>
               <h1 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]">
-                GUID checker</h1>
+                GUID/UUID checker</h1>
               <div className="w-full flex gap-3">
                 <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="guid-checker"
