@@ -61,8 +61,8 @@ const Header = () => {
                   sticky ? "py-2" : "py-5"
                 } `}
               >
-                  <>
-                    <Image
+                <span className="header-logo w-full font-bold font-mono text-3xl dark:text-white">MiniToolHub</span>
+                    {/* <Image
                       src={`/images/logo/logo.svg`}
                       alt="logo"
                       width={240}
@@ -75,8 +75,7 @@ const Header = () => {
                       width={240}
                       height={30}
                       className="header-logo hidden w-full dark:block"
-                    />
-                  </>
+                    /> */}
               </Link>
             </div>
             <div className="flex w-full items-center justify-between px-4">
