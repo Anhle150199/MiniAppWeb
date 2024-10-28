@@ -9,6 +9,13 @@ const teamData: TeamType[] = [
     designation: "Fast and free bulk GUID generator and validator for all your needs",
     image: "/images/logo/guid-generator.webp",
     link: "/guid-generator"
+  },
+  {
+    id: 2,
+    name: "Text Formatter ",
+    designation: "Free online tool for quick text formatting, case conversion, and cleanup.",
+    image: "/images/logo/text-formatter.webp",
+    link: "/text-formatter"
   }
 ];
 

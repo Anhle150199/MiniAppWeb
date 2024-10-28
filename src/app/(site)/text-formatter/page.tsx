@@ -1,7 +1,7 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { GuidGenerator } from "@/components/Tools/GuidGenerator";
+import { TextFormatter } from "@/components/Tools/TextFormatter";
 import { Metadata } from "next";
-const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/text-fomatter`;
+const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/text-formatter`;
 const title = "Text Formatter - Free Online Text Editing and Formatting Tool";
 export const metadata: Metadata = {
   title: title,
@@ -51,7 +51,7 @@ const AboutPage = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <Breadcrumb pageName="Free Text Formatter Tool" />
-      <GuidGenerator />
+      <TextFormatter />
     </main>
   );
 };
