@@ -231,17 +231,11 @@ export const TextFormatter = () => {
                   <div className="w-full flex flex-wrap gap-2">
                     <Button onClick={copyCurrentText} className="px-4" tooltipId="copy-btn" tooltipContent="Copy text">
                       <i className="bi bi-copy"></i>
-                      </Button>
+                    </Button>
                     <Button onClick={downloadTxtFile} className="px-4" tooltipId="download-btn" tooltipContent="Download text">
                       <i className="bi bi-cloud-download"></i>
-                      </Button>
+                    </Button>
 
-                  <button
-                    onClick={}
-                    className="inline-flex items-center gap-1 sm:w-1/2 justify-center rounded-md bg-primary px-7 py-1 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
-                  >
-                    <i className="bi bi-cloud-download"></i> <span></span>
-                  </button>
                   </div>
                   <textarea value={editedText}
                     onChange={onChangeAreaText}
