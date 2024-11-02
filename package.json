@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.5.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/material": "^6.1.6",
     "@prisma/client": "^5.11.0",
     "axios": "^1.6.2",
     "bcrypt": "^5.0.1",

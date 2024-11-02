@@ -44,13 +44,10 @@ export const TextFormatter = () => {
   const [textCaseOptions, setTextCaseOptions] = useState({ ...textCaseOptionDefault, None: true })
 
   // functions
-  const onChangeInputText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTextVersion(prev => ([
-      ...prev,
-      event.target.value
-    ]))
+  const onChangeAreaText = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (event.target.value.length > 10000) return;
+    setEditedText(event.target.value)
   }
-
   const handleCheckboxChange = (key: string) => {
     setTextCaseOptions((prevOptions) => ({
       ...textCaseOptionDefault,
@@ -112,6 +109,7 @@ export const TextFormatter = () => {
     const keySearch = new RegExp(keyword, 'gi');
     let newText = editedText.replaceAll(keySearch, replaceKeyword);
     setEditedText(newText);
+
   }
 
   const copyCurrentText = () => {
@@ -184,12 +182,14 @@ export const TextFormatter = () => {
                       placeholder="Enter keyword"
                       disabled={applyForAll}
                       value={keyword}
+                      maxLength={100}
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => setKeyword(event.target.value)}
                       className="mb-2 appearance-none border-2 disabled:text-gray-300 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
                     <div className="relative z-20 flex-shrink-0 inline-flex w-full justify-between gap-2">
                       <input
                         placeholder="Replace Keyword"
                         disabled={applyForAll}
+                        maxLength={100}
                         value={replaceKeyword}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setReplaceKeyword(event.target.value)}
                         className="appearance-none border-2 disabled:text-gray-300 rounded w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
@@ -228,23 +228,26 @@ export const TextFormatter = () => {
             <div className="w-full px-4 lg:w-1/2">
               <div className="-mx-2 flex flex-wrap sm:-mx-4 lg:-mx-2 xl:-mx-4">
                 <div className="w-full  rounded-lg">
+                  <div className="w-full flex flex-wrap gap-2">
+                    <Button onClick={copyCurrentText} className="px-4" tooltipId="copy-btn" tooltipContent="Copy text">
+                      <i className="bi bi-copy"></i>
+                      </Button>
+                    <Button onClick={downloadTxtFile} className="px-4" tooltipId="download-btn" tooltipContent="Download text">
+                      <i className="bi bi-cloud-download"></i>
+                      </Button>
+
+                  <button
+                    onClick={}
+                    className="inline-flex items-center gap-1 sm:w-1/2 justify-center rounded-md bg-primary px-7 py-1 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
+                  >
+                    <i className="bi bi-cloud-download"></i> <span></span>
+                  </button>
+                  </div>
                   <textarea value={editedText}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => setEditedText(event.target.value)}
+                    onChange={onChangeAreaText}
                     className="w-full min-h-96 p-2 px-2 sm:px-4 lg:px-2 xl:px-4 py-2 rounded-lg overflow-auto border-2 border-gray-300"></textarea>
                 </div>
                 <div className="w-full flex gap-1 px-2  sm:px-4 lg:px-2 xl:px-4 mb-2">
-                  <button
-                    onClick={copyCurrentText}
-                    className="inline-flex gap-1 items-center sm:w-1/2 justify-center rounded-md bg-primary px-7 py-1 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
-                  >
-                    <i className="bi bi-copy"></i><span>Copy text</span>
-                  </button>
-                  <button
-                    onClick={downloadTxtFile}
-                    className="inline-flex items-center gap-1 sm:w-1/2 justify-center rounded-md bg-primary px-7 py-1 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
-                  >
-                    <i className="bi bi-cloud-download"></i> <span>Download text</span>
-                  </button>
                 </div>
               </div>
             </div>

@@ -6,9 +6,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   tooltipId?: string;
   loading?: boolean;
   onClick: () => void;
+  children?: React.ReactNode;
 }
 
-export const Button = ({ className, loading, onClick, tooltipContent, tooltipId, value, ...props }: ButtonProps) => {
+export const Button = ({ className, loading, onClick, tooltipContent, tooltipId, value, children, ...props }: ButtonProps) => {
   return <button
     disabled={loading}
     {...(tooltipId ? { "data-tooltip-id": tooltipId } : {})}
@@ -17,7 +18,7 @@ export const Button = ({ className, loading, onClick, tooltipContent, tooltipId,
     onClick={onClick}
     {...props}
   >
-    <span>{loading ? "Loading..." : value}</span>
+    <span>{loading ? "Loading..." : (value ?? children)}</span>
     {tooltipId && <Tooltip id={tooltipId} place="top" className="z-50" />}
   </button>
 }

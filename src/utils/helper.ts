@@ -17,7 +17,7 @@ String.prototype.toSentenceCase = function (): string {
 
 String.prototype.toTitleCase = function (): string {
   return this.toLowerCase().split("\n")
-    .map(paragraph => paragraph.trim().split(' ').map(word => {
+    .map(paragraph => paragraph.split(' ').map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1)
     }).join(' ')
     ).join('\n');
@@ -27,3 +27,10 @@ String.prototype.trimExtraSpaces = function (): string {
     .replace(/[ \t]+/g, ' ')     // Thay thế các khoảng trắng liên tiếp mà không ảnh hưởng đến dấu xuống dòng
     .replace(/(\s*\n\s*)+/g, '\n'); // Đảm bảo chỉ có một dấu xuống dòng tại mỗi dòng
 };
+String.prototype.convertToASCII = function (): string {
+  return this.split("\n")
+    .map(paragraph => paragraph.trim().split(' ').map(word => {
+      return word.charCodeAt(0)
+    }).join(' ')
+    ).join('\n');
+}
