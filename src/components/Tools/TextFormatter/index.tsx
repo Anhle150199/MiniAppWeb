@@ -5,8 +5,8 @@ import 'react-tooltip/dist/react-tooltip.css';
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/utils/helper";
 import { Button } from "@/components/Common/BaseComponent";
-
-
+import UndoIcon from '@mui/icons-material/Undo';
+import RedoIcon from '@mui/icons-material/Redo';
 const tooltips = {
   None: "Keep current format",
   Uppercase: "Convert the entire text to uppercase letters: ABCDEF.",
@@ -36,7 +36,7 @@ export const TextFormatter = () => {
   // states
   const [textVersion, setTextVersion] = useState<string[]>([]); //all version which were apply format
   const [editedText, setEditedText] = useState<string>("");  //text is displayed on input 
-
+  const [indexVer, setIndexVer] = useState(-1)
   const [keyword, setKeyword] = useState<string>("");
   const [replaceKeyword, setReplaceKeyword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -57,6 +57,7 @@ export const TextFormatter = () => {
   const handleOnChangeAceptFor = () => setApplyForAll(!applyForAll)
 
   const handleTextCaseFunction = () => {
+    debugger
     if (!editedText && textCaseOptions.None) {
       return;
     }
@@ -101,15 +102,29 @@ export const TextFormatter = () => {
           break;
       }
     }
-    setEditedText(newText);
+    // setEditedText(newText);
+    saveTextVersion(newText);
   }
 
   const handleReplaceKeyWord = () => {
     if (!keyword) return;
     const keySearch = new RegExp(keyword, 'gi');
     let newText = editedText.replaceAll(keySearch, replaceKeyword);
-    setEditedText(newText);
+    // setEditedText(newText);
+    saveTextVersion(newText);
+  }
 
+  const handleUndo = () => {
+    if (indexVer == 0) {
+      return;
+    }
+    setIndexVer(indexVer - 1)
+  }
+  const handleRedo = () => {
+    if (indexVer == textVersion.length - 1) {
+      return;
+    }
+    setIndexVer(indexVer + 1)
   }
 
   const copyCurrentText = () => {
@@ -131,7 +146,24 @@ export const TextFormatter = () => {
     URL.revokeObjectURL(url);
     document.body.removeChild(link);
   }
+  const saveTextVersion = (newText: string) => {
+    setTextVersion(prevVersions => {
+      const updatedVersions = indexVer < prevVersions.length - 1
+        ? prevVersions.slice(0, indexVer + 1)
+        : prevVersions;
 
+      return [...updatedVersions, newText];
+    });
+    setIndexVer(indexVer + 1);
+
+  };
+
+  useEffect(() => {
+    setEditedText(textVersion[indexVer]);
+    console.log("textVersion", textVersion);
+    console.log("indexVer", indexVer);
+    
+  }, [indexVer])
   return (
     <section
       id="GuidGenerator"
@@ -228,14 +260,19 @@ export const TextFormatter = () => {
             <div className="w-full px-4 lg:w-1/2">
               <div className="-mx-2 flex flex-wrap sm:-mx-4 lg:-mx-2 xl:-mx-4">
                 <div className="w-full  rounded-lg">
-                  <div className="w-full flex flex-wrap gap-2">
-                    <Button onClick={copyCurrentText} className="px-4" tooltipId="copy-btn" tooltipContent="Copy text">
+                  <div className="w-full flex flex-wrap gap-1 mb-1 justify-end">
+                    <Button onClick={handleUndo} disabled={indexVer == 0} className="px-2" tooltipId="undo-btn" tooltipContent="Undo">
+                      <UndoIcon sx={{ width: 22, height: 19 }} />
+                    </Button>
+                    <Button onClick={handleRedo} className="px-2" disabled={indexVer == (textVersion.length - 1) || textVersion.length == 0} tooltipId="redo-btn" tooltipContent="Redo">
+                      <RedoIcon sx={{ width: 22, height: 19 }} />
+                    </Button>
+                    <Button onClick={copyCurrentText} className="px-3" tooltipId="copy-btn" tooltipContent="Copy text">
                       <i className="bi bi-copy"></i>
                     </Button>
-                    <Button onClick={downloadTxtFile} className="px-4" tooltipId="download-btn" tooltipContent="Download text">
+                    <Button onClick={downloadTxtFile} className="px-3" tooltipId="download-btn" tooltipContent="Download text">
                       <i className="bi bi-cloud-download"></i>
                     </Button>
-
                   </div>
                   <textarea value={editedText}
                     onChange={onChangeAreaText}

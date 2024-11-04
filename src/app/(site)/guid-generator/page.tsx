@@ -2,7 +2,7 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import { GuidGenerator } from "@/components/Tools/GuidGenerator";
 import { Metadata } from "next";
 const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/guid-generator`;
-const title = "Bulk GUID Generator and Validator Online Free - Create Unique Identifiers";
+const title = "Free GUID/UUID Generator and Validator Online  - Create Unique Identifiers";
 export const metadata: Metadata = {
   title: title,
   description: 'Generate and validate GUIDs (Globally Unique Identifiers) with customizable options. Learn more about GUIDs, their uniqueness, and their uses in software development.',
@@ -25,13 +25,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  // twitter: {
-  //   card: 'summary_large_image',
-  //   site: '@YourTwitterHandle',
-  //   title: 'Bulk GUID Generator and Validator',
-  //   description: 'Easily generate and validate GUIDs online. Customize GUIDs with hyphens, braces, and more.',
-  //   images: ['https://yourdomain.com/images/guid-generator-twitter-image.jpg'],
-  // },
 };
 const structuredData = {
   "@context": "https://schema.org",

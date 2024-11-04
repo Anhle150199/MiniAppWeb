@@ -12,7 +12,12 @@ export const copyToClipboard = (text: string) => {
 
 //Add new method to interface string
 String.prototype.toSentenceCase = function (): string {
-  return this.toLowerCase().replace(/(?:^|[.!?]\s+|\n\s*)([a-z])/g, (match, char) => match.replace(char, char.toUpperCase()));
+  
+  return this.toLowerCase().split("\n")
+    .map(paragraph => paragraph.split('. ').map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1)
+    }).join(' ')
+    ).join('\n');
 };
 
 String.prototype.toTitleCase = function (): string {

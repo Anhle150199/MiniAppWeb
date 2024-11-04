@@ -52,6 +52,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           gtag('config', 'G-8K8SYFY5HP');
           ` }}
         />
+        <Script id={"Google-GA"} async
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `gtag('event', 'conversion', {
+                'send_to': 'AW-16715802845/XYJ5COCA3doZEN3R26I-',
+                'transaction_id': ''
+            });
+          ` }}
+        />
       </head >
 
       <body>
