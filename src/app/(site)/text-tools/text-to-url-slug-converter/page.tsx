@@ -1,6 +1,6 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { TextConvertter } from "@/components/Tools/TextConverter";
-import { TextToolFunction } from "@/utils/helper";
+import { TextToolFunction } from "@/utils/clientHelper";
 import { Metadata } from "next";
 const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/text-tools/text-to-url-slug-converter`;
 const title = `Convert Text To URL Slug - ${process.env.NEXT_PUBLIC_NAME}`;

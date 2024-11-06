@@ -4,6 +4,7 @@ import { v4 as uuidv4, validate as uuidValidate, NIL as NIL_UUID, MAX as MAX_UUI
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import toast from "react-hot-toast";
+import { copyToClipboard, downloadTxtFile } from "@/utils/clientHelper";
 
 const uuidVersions = {
   v4: 4,
@@ -70,33 +71,13 @@ export const GuidGenerator = () => {
       [key]: !prevOptions[key as keyof typeof prevOptions],
     }));
   };
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      toast.success('Successfully copied!');
-    }).catch(err => {
-      toast.success('Failed to copy. Try latter!');
 
-      console.error("Failed to copy: ", err);
-    });
-  }
   const copyAllGuids = () => {
     copyToClipboard(guidsList.join('\n'));
   }
-  const downloadTxtFile = () => {
-    const fileContent = guidsList.join('\n');
-    const fileName = `Guids.txt`;
-    const blob = new Blob([fileContent], { type: "text/plain" });
 
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = fileName;
-
-    document.body.appendChild(link);
-    link.click();
-
-    URL.revokeObjectURL(url);
-    document.body.removeChild(link);
+  const handleDonwloadFile = () => {
+    downloadTxtFile(guidsList.join('\n'), `Guids.txt`);
   }
   const checkGuid = () => {
     const checkResult = uuidValidate(guidCheck);
@@ -204,7 +185,7 @@ export const GuidGenerator = () => {
                     <i className="bi bi-copy"></i><span>Copy All</span>
                   </button>
                   <button
-                    onClick={downloadTxtFile}
+                    onClick={handleDonwloadFile}
                     className="inline-flex items-center gap-1 sm:w-1/2 justify-center rounded-md bg-primary px-7 py-1 text-center text-base font-medium text-white duration-300 hover:bg-primary/70"
                   >
                     <i className="bi bi-cloud-download"></i> <span>Download file</span>

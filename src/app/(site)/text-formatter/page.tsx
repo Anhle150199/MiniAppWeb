@@ -1,8 +1,10 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { TextConvertter } from "@/components/Tools/TextConverter";
 import { TextFormatter } from "@/components/Tools/TextFormatter";
+import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { Metadata } from "next";
-const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/text-formatter`;
+const TextFormatterInfo = ToolsInfoData.TextTools.TextFormatter;
+
+const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}${TextFormatterInfo.link}`;
 const title = "Text Formatter - Free Online Text Editing and Formatting Tool";
 export const metadata: Metadata = {
   title: title,

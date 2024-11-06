@@ -27,14 +27,14 @@ export const downloadTxtFile = (fileContent: string, fileName: string) => {
 }
 
 export const TextToolFunction = {
-  Text2Slug: (input: string)=>{
+  Text2Slug: (input: string) => {
     return input.trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '');
   }
 }
 
 //Add new method to interface string
 String.prototype.toSentenceCase = function (): string {
-  
+
   return this.toLowerCase().split("\n")
     .map(paragraph => paragraph.split('. ').map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1)

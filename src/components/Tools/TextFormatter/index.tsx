@@ -2,8 +2,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
-import toast from "react-hot-toast";
-import { copyToClipboard } from "@/utils/helper";
+import { copyToClipboard, downloadTxtFile } from "@/utils/clientHelper";
 import { Button, TextArea } from "@/components/Common/BaseComponent";
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -130,22 +129,10 @@ export const TextFormatter = () => {
   const copyCurrentText = () => {
     copyToClipboard(editedText);
   }
-  const downloadTxtFile = () => {
-    const fileContent = textVersion[textVersion.length];
-    const fileName = `FomattedText.txt`;
-    const blob = new Blob([fileContent], { type: "text/plain" });
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = fileName;
-
-    document.body.appendChild(link);
-    link.click();
-
-    URL.revokeObjectURL(url);
-    document.body.removeChild(link);
+  const handleDonwloadFile = () => {
+    downloadTxtFile(textVersion[textVersion.length], `FomattedText.txt`);
   }
+
   const saveTextVersion = (newText: string) => {
     setTextVersion(prevVersions => {
       const updatedVersions = indexVer < prevVersions.length - 1
@@ -267,7 +254,7 @@ export const TextFormatter = () => {
                     <Button onClick={copyCurrentText} className="px-3" tooltipId="copy-btn" tooltipContent="Copy text">
                       <i className="bi bi-copy"></i>
                     </Button>
-                    <Button onClick={downloadTxtFile} className="px-3" tooltipId="download-btn" tooltipContent="Download text">
+                    <Button onClick={handleDonwloadFile} className="px-3" tooltipId="download-btn" tooltipContent="Download text">
                       <i className="bi bi-cloud-download"></i>
                     </Button>
                   </div>

@@ -1,6 +1,6 @@
 import { TeamType } from "@/types/team";
 import SectionTitle from "../Common/SectionTitle";
-import SingleTool from "./SingleTeam";
+import SingleTool from "./SingleTool";
 
 const teamData: TeamType[] = [
   {

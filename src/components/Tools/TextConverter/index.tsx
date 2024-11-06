@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect, Fragment } from "react";
 import 'react-tooltip/dist/react-tooltip.css';
-import { copyToClipboard, downloadTxtFile } from "@/utils/helper";
+import { copyToClipboard, downloadTxtFile } from "@/utils/clientHelper";
 import { Button, TextArea } from "@/components/Common/BaseComponent";
 
 export const TextConvertter = ({functionHandler}:{
