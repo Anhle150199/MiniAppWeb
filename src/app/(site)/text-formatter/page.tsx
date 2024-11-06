@@ -1,4 +1,5 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import { TextConvertter } from "@/components/Tools/TextConverter";
 import { TextFormatter } from "@/components/Tools/TextFormatter";
 import { Metadata } from "next";
 const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/text-formatter`;
@@ -42,7 +43,7 @@ const structuredData = {
   }
 }
 
-const AboutPage = () => {
+const TextFormatterPage = () => {
   return (
     <main>
 
@@ -56,4 +57,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default TextFormatterPage;

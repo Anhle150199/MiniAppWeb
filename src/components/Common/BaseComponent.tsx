@@ -1,13 +1,6 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonProps } from "@/types/baseComponentTypes"
+import { TextareaHTMLAttributes } from "react"
 import { Tooltip } from "react-tooltip"
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  className?: string;
-  tooltipContent?: string;
-  tooltipId?: string;
-  loading?: boolean;
-  onClick: () => void;
-  children?: React.ReactNode;
-}
 
 export const Button = ({ className, loading, onClick, tooltipContent, tooltipId, value, children, ...props }: ButtonProps) => {
   return <button
@@ -21,4 +14,14 @@ export const Button = ({ className, loading, onClick, tooltipContent, tooltipId,
     <span>{loading ? "Loading..." : (value ?? children)}</span>
     {tooltipId && <Tooltip id={tooltipId} place="top" className="z-50" />}
   </button>
+}
+
+export const TextArea = ({ className, onChange, value, placeholder, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
+  return (<textarea value={value}
+    onChange={onChange}
+    placeholder={placeholder}
+    className={`w-full min-h-52 p-2 px-2 sm:px-4 lg:px-2 xl:px-4 py-2 rounded-lg overflow-auto border-2 border-gray-300 ${className ?? ''}`}
+    {...props}
+    ></textarea>
+  )
 }

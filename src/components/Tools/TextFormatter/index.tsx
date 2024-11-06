@@ -4,7 +4,7 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import toast from "react-hot-toast";
 import { copyToClipboard } from "@/utils/helper";
-import { Button } from "@/components/Common/BaseComponent";
+import { Button, TextArea } from "@/components/Common/BaseComponent";
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 const tooltips = {
@@ -160,9 +160,6 @@ export const TextFormatter = () => {
 
   useEffect(() => {
     setEditedText(textVersion[indexVer]);
-    console.log("textVersion", textVersion);
-    console.log("indexVer", indexVer);
-    
   }, [indexVer])
   return (
     <section
@@ -274,10 +271,10 @@ export const TextFormatter = () => {
                       <i className="bi bi-cloud-download"></i>
                     </Button>
                   </div>
-                  <textarea value={editedText}
+
+                  <TextArea value={editedText}
                     onChange={onChangeAreaText}
-                    className="w-full min-h-96 p-2 px-2 sm:px-4 lg:px-2 xl:px-4 py-2 rounded-lg overflow-auto border-2 border-gray-300"></textarea>
-                </div>
+                    placeholder="Input Text Here"></TextArea>                </div>
                 <div className="w-full flex gap-1 px-2  sm:px-4 lg:px-2 xl:px-4 mb-2">
                 </div>
               </div>

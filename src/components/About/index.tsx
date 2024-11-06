@@ -18,14 +18,8 @@ const About = () => {
                 {`Welcome to MiniToolHub, a platform offering a variety of free and easy-to-use tools for everyone. As a full-stack developer with expertise in both front-end and back-end development, I created this site not only to share useful utilities with the community but also as a way to continuously improve my programming skills. My goal is to make everyday tasks more convenient and accessible, and best of all, all the tools here are completely free to use.`}
                 </p>
                 <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
-                {`If you have any ideas for a tool you'd like to see, feel free to share them with me—I’ll make it happen!`}                </p>
-
-                {/* <a
-                  href="/#"
-                  className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-center text-base font-medium text-white duration-300 hover:bg-primary/90"
-                >
-                  Know More
-                </a> */}
+                {`If you have any ideas for a tool you'd like to see, feel free to share them with me—I’ll make it happen!`}                
+              </p>
               </div>
             </div>
           </div>
