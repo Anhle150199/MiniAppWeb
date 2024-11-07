@@ -1,59 +1,46 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { TextConvertter } from "@/components/Tools/TextConverter";
+import { ToolsInfoData } from "@/mocks/toolsInfo";
+import { ToolInfomation } from "@/types/baseComponentTypes";
 import { TextToolFunction } from "@/utils/clientHelper";
+import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
-const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/text-tools/text-to-url-slug-converter`;
-const title = `Convert Text To URL Slug - ${process.env.NEXT_PUBLIC_NAME}`;
-
-export const metadata: Metadata = {
-  title: title,
-  description: `Easily transform any text into an SEO-friendly URL slug on ${process.env.NEXT_PUBLIC_NAME}. This free, online slug generator is perfect for web developers, content creators, and SEO specialists who want clean, readable, and optimized URLs for websites and blogs.`,
-  keywords: [
-    'URL slug generator', 
-    'text to URL slug', 
-    'slug converter', 
-    'SEO-friendly URL', 
-    'URL slug tool', 
-    'text to URL converter', 
-    'slug creation tool', 
-    'online URL slug generator', 
-    'URL optimization', 
-    'URL text converter'
-  ],
+const Text2SlugInfo = ToolsInfoData.TextTools.ToSlug;
+const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN+Text2SlugInfo.link;
+const GenerateMetadata = (toolInfo: ToolInfomation) => {
+  return {
+    title: toolInfo.title,
+    description: toolInfo.description,
+    keywords: toolInfo.keywords,
     alternates: {
-    canonical: path,
-  },
-  robots: "index, follow",
-  openGraph: {
-    type: 'website',
-    url: path,
-    title: `Convert Text To URL Slug - Free Online URL Slug Generator - ${process.env.NEXT_PUBLIC_NAME}`,
-    description: `Easily transform any text into an SEO-friendly URL slug on ${process.env.NEXT_PUBLIC_NAME}. This free, online slug generator is perfect for web developers, content creators, and SEO specialists who want clean, readable, and optimized URLs for websites and blogs.`,
-    images: [
-      {
-        url: `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/images/logo/url-slug-converter.webp`,
-        width: 1200,
-        height: 630,
-        alt: 'Convert Text To URL Slug - Free Online URL Slug Generator',
-      },
-    ],
-  },
-};
+      canonical: path,
+    },
+    robots: toolInfo.robots ?? "index, follow",
+    openGraph: {
+      type: 'website',
+      url: path,
+      title: toolInfo.title,
+      description: toolInfo.description,
+      images: [
+        {
+          url: process.env.NEXT_PUBLIC_CURRENT_DOMAIN + toolInfo.image,
+          width: 1200,
+          height: 630,
+          alt: toolInfo.title,
+        },
+      ],
+    },
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": title,
-  "url": path,
-  "applicationCategory": "UtilityApplication",
-  "operatingSystem": "Web",
-  "description": metadata.description,
-  "offers": {
-    "@type": "Offer",
-    "price": "0.00",
-    "priceCurrency": "USD"
   }
 }
+export const metadata: Metadata = GenerateMetadata(Text2SlugInfo);
+const structuredData = GenerateStructuredData({
+  title: Text2SlugInfo.title,
+  path,
+  description: metadata.description ?? "",
+  applicationCategory: "UtilityApplication"
+})
+
 debugger
 const URLSlugConverterPage = () => {
   return (

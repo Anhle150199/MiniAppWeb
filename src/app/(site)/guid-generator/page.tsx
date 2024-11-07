@@ -1,33 +1,40 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { GuidGenerator } from "@/components/Tools/GuidGenerator";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
+import { ToolInfomation } from "@/types/baseComponentTypes";
 import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
-const GuidGeneratorInfo = ToolsInfoData.GeneratorTools.GuidGenerator
-const path = `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}${GuidGeneratorInfo.link}`;
+const GuidGeneratorInfo = ToolsInfoData.GeneratorTools.GuidGenerator;
+const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + GuidGeneratorInfo.link;
 
-export const metadata: Metadata = {
-  title: GuidGeneratorInfo.title,
-  keywords: ['guid', 'uuid', 'GUID generator', 'guid gen', 'uuid gen', 'UUID generator', 'guid creator', 'uuid creator', 'bulk GUID generation', 'uuid guid generator', 'GUID validator', 'Globally Unique Identifier', 'generate GUIDs online', 'validate GUIDs'],
-  alternates: {
-    canonical: path,
-  },
-  robots: "index, follow",
-  openGraph: {
-    type: 'website',
-    url: path,
-    title: GuidGeneratorInfo.title,
-    description: 'Easily generate and validate GUIDs online. Customize GUIDs with hyphens, braces, and more.',
-    images: [
-      {
-        url: `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/images/logo/guid-generator.webp`,
-        width: 1200,
-        height: 630,
-        alt: GuidGeneratorInfo.title,
-      },
-    ],
-  },
-};
+const GenerateMetadata = (toolInfo: ToolInfomation) => {
+  return {
+    title: toolInfo.title,
+    description: toolInfo.description,
+    keywords: toolInfo.keywords,
+    alternates: {
+      canonical: path,
+    },
+    robots: toolInfo.robots ?? "index, follow",
+    openGraph: {
+      type: 'website',
+      url: path,
+      title: toolInfo.title,
+      description: toolInfo.description,
+      images: [
+        {
+          url: process.env.NEXT_PUBLIC_CURRENT_DOMAIN + toolInfo.image,
+          width: 1200,
+          height: 630,
+          alt: toolInfo.title,
+        },
+      ],
+    },
+
+  }
+}
+
+export const metadata: Metadata = GenerateMetadata(GuidGeneratorInfo);
 
 const AboutPage = () => {
   const structuredData = GenerateStructuredData({

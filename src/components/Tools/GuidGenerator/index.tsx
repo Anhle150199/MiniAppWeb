@@ -1,9 +1,8 @@
 "use client"
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4, validate as uuidValidate, NIL as NIL_UUID, MAX as MAX_UUID, v7 as uuidv7 } from 'uuid';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
-import toast from "react-hot-toast";
 import { copyToClipboard, downloadTxtFile } from "@/utils/clientHelper";
 
 const uuidVersions = {
