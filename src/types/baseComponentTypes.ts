@@ -19,7 +19,7 @@ export interface ToolInfomation {
   pageName: string;
   description: string;
   keywords: string[];
-  robots?: string ;
+  robots?: string;
   markdown?: string;
 }
 
@@ -31,10 +31,16 @@ export type ToolsInfoDataType = {
 
 export type GeneratorToolsType = {
   GuidGenerator: ToolInfomation;
+  name: string;
 }
 
 export type TextToolsType = {
-
+  name: string;
   TextFormatter: ToolInfomation;
   ToSlug: ToolInfomation;
+}
+export type Text2SlugParams = {
+  text: string;
+  typeCase: number;
+  isMultipleLine: boolean
 }

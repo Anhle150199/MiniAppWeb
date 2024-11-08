@@ -1,5 +1,5 @@
 import { ButtonProps } from "@/types/baseComponentTypes"
-import { TextareaHTMLAttributes } from "react"
+import { InputHTMLAttributes, TextareaHTMLAttributes } from "react"
 import { Tooltip } from "react-tooltip"
 
 export const Button = ({ className, loading, onClick, tooltipContent, tooltipId, value, children, ...props }: ButtonProps) => {
@@ -25,3 +25,15 @@ export const TextArea = ({ className, onChange, value, placeholder, ...props }: 
     ></textarea>
   )
 }
+
+export const CheckBox = ({ className, onChange, checked, title, ...props }: InputHTMLAttributes<HTMLInputElement>)=>(                <label className="flex items-center space-x-2 m-1 cursor-pointer">
+  <input
+    type="checkbox"
+    className="h-4 w-4 text-blue-800 focus:ring-2 focus:ring-red-500"
+    checked = {checked}
+    onChange = {onChange}
+    {...props}
+  />
+  <span className="text-sm font-medium" >{title}</span>
+</label>
+)

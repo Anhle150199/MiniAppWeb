@@ -2,7 +2,7 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import { TextConvertter } from "@/components/Tools/TextConverter";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
-import { TextToolFunction } from "@/utils/clientHelper";
+import { Text2Slug } from "@/utils/clientHelper";
 import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
 const Text2SlugInfo = ToolsInfoData.TextTools.ToSlug;
@@ -49,8 +49,8 @@ const URLSlugConverterPage = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Breadcrumb pageName="Text To URL Slug Converter" parentPage="Text Tools" pageDescription={metadata.description} />
-      <TextConvertter  functionHandler = {TextToolFunction.Text2Slug}/>
+      <Breadcrumb pageName={Text2SlugInfo.pageName} parentPage={ToolsInfoData.TextTools.name} pageDescription={metadata.description} />
+      <TextConvertter  functionHandler = {Text2Slug}/>
     </main>
   );
 };

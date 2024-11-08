@@ -2,6 +2,7 @@ import { ToolsInfoDataType } from "@/types/baseComponentTypes";
 
 export const ToolsInfoData: ToolsInfoDataType = {
   GeneratorTools: {
+    name: "Generator Tools",
     GuidGenerator: {
       id: 10,
       name: "GUID Generator",
@@ -16,6 +17,7 @@ export const ToolsInfoData: ToolsInfoDataType = {
     },
   },
   TextTools: {
+    name: "Text Tools",
     TextFormatter: {
       id: 20,
       name: "Text Formatter ",

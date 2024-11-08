@@ -52,7 +52,7 @@ const post = await getMarkdownPostByPath(TextFormatterInfo.markdown);
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Breadcrumb pageName={TextFormatterInfo.pageName} />
+      <Breadcrumb pageName={TextFormatterInfo.pageName} pageDescription={ToolsInfoData.TextTools.name} />
       <TextFormatter />
       <PostMarkdown content={post ?? ""} />
     </main>

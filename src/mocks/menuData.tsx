@@ -1,4 +1,5 @@
 import { Menu } from "@/types/menu";
+import { ToolsInfoData } from "./toolsInfo";
 
 const menuData: Menu[] = [
   {
@@ -8,26 +9,39 @@ const menuData: Menu[] = [
     newTab: false,
   },
   {
-    id: 7,
-    title: "Tools",
+    id: 2,
+    title: ToolsInfoData.GeneratorTools.name,
     newTab: false,
     submenu: [
       {
-        id: 71,
-        title: "GUID Generator",
-        path: "/guid-generator",
-        newTab: false,
-      },
-      {
-        id: 72,
-        title: "Text Formatter",
-        path: "/text-formatter",
+        id: ToolsInfoData.GeneratorTools.GuidGenerator.id,
+        title: ToolsInfoData.GeneratorTools.GuidGenerator.name,
+        path: ToolsInfoData.GeneratorTools.GuidGenerator.link,
         newTab: false,
       },
     ],
   },
   {
-    id: 2,
+    id: 3,
+    title: ToolsInfoData.TextTools.name,
+    newTab: false,
+    submenu: [
+      {
+        id: ToolsInfoData.TextTools.TextFormatter.id,
+        title: ToolsInfoData.TextTools.TextFormatter.name,
+        path: ToolsInfoData.TextTools.TextFormatter.link,
+        newTab: false,
+      },
+      {
+        id: ToolsInfoData.TextTools.ToSlug.id,
+        title: ToolsInfoData.TextTools.ToSlug.name,
+        path: ToolsInfoData.TextTools.ToSlug.link,
+        newTab: false,
+      },
+    ],
+  },
+  {
+    id: 999,
     title: "About",
     path: "/about",
     newTab: false,

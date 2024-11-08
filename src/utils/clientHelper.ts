@@ -1,4 +1,6 @@
 "use client"
+import { TypeCase } from "@/mocks/dataList";
+import { Text2SlugParams } from "@/types/baseComponentTypes";
 import toast from "react-hot-toast";
 
 export const copyToClipboard = (text: string) => {
@@ -25,13 +27,35 @@ export const downloadTxtFile = (fileContent: string, fileName: string) => {
   URL.revokeObjectURL(url);
   document.body.removeChild(link);
 }
-
-export const TextToolFunction = {
-  Text2Slug: (input: string) => {
-    return input.trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '');
-  }
+const StringToSlug = (text: string) => {
+  let x = text
+    return text
+    .normalize('NFD')                    // Chuyển đổi dấu sang dạng phân rã (decompose accents)
+    .replace(/[\u0300-\u036f]/g, '')     // Loại bỏ dấu (accent marks)
+    .replace(/[đĐ]/g, 'd')               // Chuyển đ, Đ sang d
+    .replace(/[^a-z0-9\s-]/gi, '')       // Loại bỏ ký tự đặc biệt (chỉ giữ lại chữ cái, số và dấu cách)
+    .replace(/\s+/g, '-')                // Thay dấu cách bằng dấu gạch ngang
+    .replace(/-+/g, '-')                 // Xử lý trường hợp có nhiều dấu gạch ngang liên tiếp
+    .replace(/^-+|-+$/g, '');            // Xóa dấu gạch ngang ở đầu và cuối chuỗi
 }
+export const Text2Slug = (input: Text2SlugParams): string => {
+  debugger
+  let processedText =input.text;
 
+  if (input.isMultipleLine) {
+    processedText = processedText.split('\n').map(StringToSlug).join('\n');
+  } else {
+    processedText = StringToSlug(processedText);
+  }
+  if(input.typeCase === TypeCase.Lowercase){
+    return processedText.toLowerCase()
+  }
+  if(input.typeCase === TypeCase.Uppercase){
+    return processedText.toUpperCase()
+  }
+
+  return processedText;
+};
 //Add new method to interface string
 String.prototype.toSentenceCase = function (): string {
 
