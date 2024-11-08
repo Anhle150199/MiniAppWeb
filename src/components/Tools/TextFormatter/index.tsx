@@ -1,10 +1,9 @@
 "use client"
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState } from "react";
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { copyToClipboard, downloadTxtFile } from "@/utils/clientHelper";
 import { Button, TextArea } from "@/components/Common/BaseComponent";
-import markdownToHtml from "@/utils/markdownToHtml";
 
 const tooltips = {
   None: "Keep current format",
@@ -33,8 +32,7 @@ const textCaseOptionDefault = {
 }
 export const TextFormatter = () => {
   // states
-  const [editedText, setEditedText] = useState<string>("");   
-  const [guideDoc, setGuideDoc] = useState<string>("");  
+  const [editedText, setEditedText] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
   const [replaceKeyword, setReplaceKeyword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -55,7 +53,6 @@ export const TextFormatter = () => {
   const handleOnChangeAceptFor = () => setApplyForAll(!applyForAll)
 
   const handleTextCaseFunction = () => {
-    debugger
     if (!editedText && textCaseOptions.None) {
       return;
     }
@@ -120,8 +117,7 @@ export const TextFormatter = () => {
 
   return (
     <section
-      id="GuidGenerator"
-      className="bg-gray-1 pb-8 pt-2 dark:bg-dark-2 lg:pb-[70px] lg:pt-[20px]"
+      className="bg-gray-1 pb-3 pt-2 dark:bg-dark-2 "
     >
       <div className="container">
         <div className="wow fadeInUp" data-wow-delay=".2s">
@@ -225,8 +221,7 @@ export const TextFormatter = () => {
 
                   <TextArea value={editedText}
                     onChange={onChangeAreaText}
-                    placeholder="Input Text Here"></TextArea>                </div>
-                <div className="w-full flex gap-1 px-2  sm:px-4 lg:px-2 xl:px-4 mb-2">
+                    placeholder="Input Text Here"></TextArea>
                 </div>
               </div>
             </div>

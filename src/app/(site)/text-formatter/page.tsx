@@ -1,4 +1,5 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import PostMarkdown from "@/components/Common/PostMarkdown";
 import { TextFormatter } from "@/components/Tools/TextFormatter";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
@@ -53,10 +54,7 @@ const post = await getMarkdownPostByPath(TextFormatterInfo.markdown);
       />
       <Breadcrumb pageName={TextFormatterInfo.pageName} />
       <TextFormatter />
-
-      <hr />
-      {post && <div className="mb-4" dangerouslySetInnerHTML={{ __html: post}} >
-      </div>}
+      <PostMarkdown content={post ?? ""} />
     </main>
   );
 };
