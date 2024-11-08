@@ -1,11 +1,20 @@
 import fs from "fs";
 import matter from "gray-matter";
 import { join } from "path";
+import markdownToHtml from "./markdownToHtml";
 
-const postsDirectory = join(process.cwd(), "markdown/blogs");
+const postsDirectory = join(process.cwd(), "markdowns");
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
+}
+
+export async function getMarkdownPostByPath(markdownPath: string| undefined|null) {
+  if(!markdownPath) return null;
+  const fullPath = join(postsDirectory, markdownPath);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(fileContents);
+  return  await markdownToHtml(content)
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []) {

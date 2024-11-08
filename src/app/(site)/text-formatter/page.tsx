@@ -2,10 +2,11 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import { TextFormatter } from "@/components/Tools/TextFormatter";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
+import { getMarkdownPostByPath } from "@/utils/markdown";
 import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
 const TextFormatterInfo = ToolsInfoData.TextTools.TextFormatter;
-const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN+TextFormatterInfo.link;
+const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + TextFormatterInfo.link;
 const GenerateMetadata = (toolInfo: ToolInfomation) => {
   return {
     title: toolInfo.title,
@@ -41,8 +42,8 @@ const structuredData = GenerateStructuredData({
   description: metadata.description ?? "",
   applicationCategory: "UtilityApplication"
 })
-
-const TextFormatterPage = () => {
+const TextFormatterPage = async () => {
+const post = await getMarkdownPostByPath(TextFormatterInfo.markdown);
   return (
     <main>
 
@@ -52,6 +53,10 @@ const TextFormatterPage = () => {
       />
       <Breadcrumb pageName={TextFormatterInfo.pageName} />
       <TextFormatter />
+
+      <hr />
+      {post && <div className="mb-4" dangerouslySetInnerHTML={{ __html: post}} >
+      </div>}
     </main>
   );
 };

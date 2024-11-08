@@ -26,6 +26,7 @@ export const ToolsInfoData: ToolsInfoDataType = {
       pageName: "Free Text Formatter Tool",
       description: `Discover Text Formatter on ${process.env.NEXT_PUBLIC_NAME} - your free, online text editing tool designed for easy text formatting. Quickly convert text to uppercase, lowercase, capitalize sentences, remove extra spaces, and count words. Perfect for writers, students, and professionals who need fast, reliable text editing. Try Text Formatter today to simplify your text formatting needs!`,
       keywords: ['text formatter', 'text editing tool', 'uppercase converter', 'lowercase converter', 'capitalize sentences', 'text cleaner', 'online text formatting', 'text tools'],
+      markdown: "/TextFormatter/guide.md",
     },
     ToSlug: {
       id: 21,

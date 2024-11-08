@@ -231,11 +231,6 @@ export const TextFormatter = () => {
               </div>
             </div>
           </div>
-          <hr />
-          <div className="mb-4" dangerouslySetInnerHTML={{ __html: guideDoc }} >
-
-          </div>
-          <hr />
         </div>
       </div>
 

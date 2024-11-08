@@ -20,6 +20,7 @@ export interface ToolInfomation {
   description: string;
   keywords: string[];
   robots?: string ;
+  markdown?: string;
 }
 
 
