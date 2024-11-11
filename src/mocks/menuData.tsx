@@ -38,6 +38,12 @@ const menuData: Menu[] = [
         path: ToolsInfoData.TextTools.Tools.ToSlug.link,
         newTab: false,
       },
+      {
+        id: ToolsInfoData.TextTools.Tools.MarkdownToHTML.id,
+        title: ToolsInfoData.TextTools.Tools.MarkdownToHTML.name,
+        path: ToolsInfoData.TextTools.Tools.MarkdownToHTML.link,
+        newTab: false,
+      },
     ],
   },
   {

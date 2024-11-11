@@ -63,18 +63,21 @@ export const ToolsInfoData: ToolsInfoDataType = {
         summary: "Quickly convert Markdown text to HTML.",
         image: "/images/logo/markdown-to-html.webp",
         title: `Convert Markdown to HTML - ${process.env.NEXT_PUBLIC_NAME}`,
-        link: "/text-tools/markdown-to-html",
+        link: "/text-tools/markdown-to-html-converter",
         pageName: "Markdown to HTML Converter",
         description: `Effortlessly convert Markdown text to HTML on ${process.env.NEXT_PUBLIC_NAME}. This free, online tool is ideal for developers, writers, and content creators who need to format content for the web.`,
         keywords: [
           "markdown to HTML converter",
           "markdown converter",
           "HTML converter",
+          "markdown convert",
           "markdown to HTML tool",
           "online markdown converter",
           "HTML formatting",
           "markdown to web",
-          "text to HTML"
+          "text to HTML",
+          "markdown",
+          "html convert from markdown"
         ],
         markdown: "/MarkdownToHTML/guide.md"
       }

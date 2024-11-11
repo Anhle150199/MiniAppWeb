@@ -1,13 +1,13 @@
+
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import PostMarkdown from "@/components/Common/PostMarkdown";
-import { Text2SlugConvertter } from "@/components/Tools/TextConverter/text2Slug";
+import { Markdown2HTMLConverter } from "@/components/Tools/TextConverter/markdown2HTML";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
-import { Text2Slug } from "@/utils/clientHelper";
 import { getMarkdownPostByPath } from "@/utils/markdown";
 import { Metadata } from "next";
-const Text2SlugInfo = ToolsInfoData.TextTools.Tools.ToSlug;
-const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN+Text2SlugInfo.link;
+const ToolInfoData = ToolsInfoData.TextTools.Tools.MarkdownToHTML;
+const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + ToolInfoData.link;
 const GenerateMetadata = (toolInfo: ToolInfomation) => {
   return {
     title: toolInfo.title,
@@ -34,7 +34,7 @@ const GenerateMetadata = (toolInfo: ToolInfomation) => {
 
   }
 }
-const GenerateStructuredData = async ({ title, path, description, applicationCategory }: { title: string, path: string, description: string, applicationCategory?: string })=> {
+const GenerateStructuredData = async ({ title, path, description, applicationCategory }: { title: string, path: string, description: string, applicationCategory?: string }) => {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -51,16 +51,17 @@ const GenerateStructuredData = async ({ title, path, description, applicationCat
   }
 }
 
-export const metadata: Metadata = GenerateMetadata(Text2SlugInfo);
+export const metadata: Metadata = GenerateMetadata(ToolInfoData);
 const structuredData = GenerateStructuredData({
-  title: Text2SlugInfo.title,
+  title: ToolInfoData.title,
   path,
   description: metadata.description ?? "",
   applicationCategory: "UtilityApplication"
 })
 
-const URLSlugConverterPage = () => {
-  const post =  getMarkdownPostByPath(Text2SlugInfo.markdown);
+
+const HtmlConverterPage = () => {
+  const post = getMarkdownPostByPath(ToolInfoData.markdown);
 
   return (
     <main>
@@ -68,11 +69,11 @@ const URLSlugConverterPage = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Breadcrumb pageName={Text2SlugInfo.pageName} parentPage={ToolsInfoData.TextTools.Name} pageDescription={metadata.description} />
-      <Text2SlugConvertter  functionHandler = {Text2Slug}/>
+      <Breadcrumb pageName={ToolInfoData.pageName} parentPage={ToolsInfoData.TextTools.Name} pageDescription={metadata.description} />
+      <Markdown2HTMLConverter  />
       <PostMarkdown content={post ?? ""} />
     </main>
   );
 };
 
-export default URLSlugConverterPage;
+export default HtmlConverterPage;

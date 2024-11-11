@@ -6,7 +6,7 @@ import { Button, CheckBox, TextArea } from "@/components/Common/BaseComponent";
 import { Text2SlugParams } from "@/types/baseComponentTypes";
 import { TypeCase } from "@/mocks/dataList";
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-export const TextConvertter = ({ functionHandler }: {
+export const Text2SlugConvertter = ({ functionHandler }: {
   functionHandler: (input: Text2SlugParams) => string
 }) => {
   // states
