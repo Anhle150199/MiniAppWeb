@@ -4,7 +4,6 @@ import { TextFormatter } from "@/components/Tools/TextFormatter";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
 import { getMarkdownPostByPath } from "@/utils/markdown";
-import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
 const TextFormatterInfo = ToolsInfoData.TextTools.TextFormatter;
 const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + TextFormatterInfo.link;
@@ -34,6 +33,22 @@ const GenerateMetadata = (toolInfo: ToolInfomation) => {
 
   }
 }
+const GenerateStructuredData = async ({ title, path, description, applicationCategory }: { title: string, path: string, description: string, applicationCategory?: string })=> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": title,
+    "url": path,
+    "applicationCategory": applicationCategory ?? "UtilityApplication",
+    "operatingSystem": "Web",
+    "description": description,
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    }
+  }
+}
 
 export const metadata: Metadata = GenerateMetadata(TextFormatterInfo);
 
@@ -43,8 +58,8 @@ const structuredData = GenerateStructuredData({
   description: metadata.description ?? "",
   applicationCategory: "UtilityApplication"
 })
-const TextFormatterPage = async () => {
-const post = await getMarkdownPostByPath(TextFormatterInfo.markdown);
+const TextFormatterPage = () => {
+const post =  getMarkdownPostByPath(TextFormatterInfo.markdown);
   return (
     <main>
 

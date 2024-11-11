@@ -2,7 +2,6 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import { GuidGenerator } from "@/components/Tools/GuidGenerator";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
-import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
 const GuidGeneratorInfo = ToolsInfoData.GeneratorTools.GuidGenerator;
 const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + GuidGeneratorInfo.link;
@@ -31,6 +30,22 @@ const GenerateMetadata = (toolInfo: ToolInfomation) => {
       ],
     },
 
+  }
+}
+const GenerateStructuredData = async ({ title, path, description, applicationCategory }: { title: string, path: string, description: string, applicationCategory?: string })=> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": title,
+    "url": path,
+    "applicationCategory": applicationCategory ?? "UtilityApplication",
+    "operatingSystem": "Web",
+    "description": description,
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    }
   }
 }
 

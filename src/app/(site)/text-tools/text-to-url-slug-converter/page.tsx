@@ -5,7 +5,6 @@ import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
 import { Text2Slug } from "@/utils/clientHelper";
 import { getMarkdownPostByPath } from "@/utils/markdown";
-import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
 const Text2SlugInfo = ToolsInfoData.TextTools.ToSlug;
 const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN+Text2SlugInfo.link;
@@ -35,6 +34,23 @@ const GenerateMetadata = (toolInfo: ToolInfomation) => {
 
   }
 }
+const GenerateStructuredData = async ({ title, path, description, applicationCategory }: { title: string, path: string, description: string, applicationCategory?: string })=> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": title,
+    "url": path,
+    "applicationCategory": applicationCategory ?? "UtilityApplication",
+    "operatingSystem": "Web",
+    "description": description,
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    }
+  }
+}
+
 export const metadata: Metadata = GenerateMetadata(Text2SlugInfo);
 const structuredData = GenerateStructuredData({
   title: Text2SlugInfo.title,
@@ -43,8 +59,8 @@ const structuredData = GenerateStructuredData({
   applicationCategory: "UtilityApplication"
 })
 
-const URLSlugConverterPage = async () => {
-  const post = await getMarkdownPostByPath(Text2SlugInfo.markdown);
+const URLSlugConverterPage = () => {
+  const post =  getMarkdownPostByPath(Text2SlugInfo.markdown);
 
   return (
     <main>
