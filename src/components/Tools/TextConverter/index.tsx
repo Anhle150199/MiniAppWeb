@@ -5,7 +5,7 @@ import { copyToClipboard, downloadTxtFile } from "@/utils/clientHelper";
 import { Button, CheckBox, TextArea } from "@/components/Common/BaseComponent";
 import { Text2SlugParams } from "@/types/baseComponentTypes";
 import { TypeCase } from "@/mocks/dataList";
-
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 export const TextConvertter = ({ functionHandler }: {
   functionHandler: (input: Text2SlugParams) => string
 }) => {
@@ -82,7 +82,7 @@ export const TextConvertter = ({ functionHandler }: {
             </div>
           </div>
           <div className="w-full min-h-52 p-2 px-2 sm:px-4 lg:px-2 xl:px-4 py-2 rounded-lg border-2 border-gray-300">
-          <h2 className="my-3 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]">Tool Options</h2>
+          <h2 className="my-3 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[20px] sm:leading-[1.2]"><AutoFixHighIcon/><span>Tool Options</span></h2>
             <div className="  gap-4 mb-3 ">
               <div className="flex-col inline-block mx-2 align-top">
                 <h3 className="text-medium font-bold mb-2">Multi-line Mode</h3>

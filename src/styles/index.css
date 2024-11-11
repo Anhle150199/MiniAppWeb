@@ -69,7 +69,9 @@ body {
 }
 
 .blog-details h2 {
-  @apply text-dark mb-8 text-2xl font-bold dark:text-white sm:text-3xl md:text-[35px] md:leading-[1.28];
+  /* @apply text-dark mb-8 text-2xl font-bold dark:text-white sm:text-3xl md:text-[35px] md:leading-[1.28]; */
+  @apply text-dark my-3 text-3xl font-bold dark:text-white leading-tight   sm:text-[25px] sm:leading-[1.2];
+
 }
 
 .blog-details h3 {

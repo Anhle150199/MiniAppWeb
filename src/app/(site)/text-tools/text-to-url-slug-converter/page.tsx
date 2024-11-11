@@ -1,8 +1,10 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import PostMarkdown from "@/components/Common/PostMarkdown";
 import { TextConvertter } from "@/components/Tools/TextConverter";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
 import { Text2Slug } from "@/utils/clientHelper";
+import { getMarkdownPostByPath } from "@/utils/markdown";
 import { GenerateStructuredData } from "@/utils/serverHelper";
 import { Metadata } from "next";
 const Text2SlugInfo = ToolsInfoData.TextTools.ToSlug;
@@ -41,8 +43,9 @@ const structuredData = GenerateStructuredData({
   applicationCategory: "UtilityApplication"
 })
 
-debugger
-const URLSlugConverterPage = () => {
+const URLSlugConverterPage = async () => {
+  const post = await getMarkdownPostByPath(Text2SlugInfo.markdown);
+
   return (
     <main>
       <script
@@ -51,6 +54,7 @@ const URLSlugConverterPage = () => {
       />
       <Breadcrumb pageName={Text2SlugInfo.pageName} parentPage={ToolsInfoData.TextTools.name} pageDescription={metadata.description} />
       <TextConvertter  functionHandler = {Text2Slug}/>
+      <PostMarkdown content={post ?? ""} />
     </main>
   );
 };

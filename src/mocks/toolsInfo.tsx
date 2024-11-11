@@ -50,7 +50,9 @@ export const ToolsInfoData: ToolsInfoDataType = {
         'online URL slug generator',
         'URL optimization',
         'URL text converter'
-      ]
+      ],
+      markdown: "/TextToSLug/descriptionPage.md",
+
     }
   }
 }

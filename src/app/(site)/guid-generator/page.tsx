@@ -50,7 +50,7 @@ const AboutPage = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Breadcrumb pageName={GuidGeneratorInfo.pageName} />
+      <Breadcrumb pageName={GuidGeneratorInfo.pageName} pageDescription={""} />
       <GuidGenerator />
     </main>
   );
