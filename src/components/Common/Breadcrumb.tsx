@@ -9,7 +9,7 @@ const Breadcrumb = ({
   pageName: string;
   parentPage?: string;
   parentPageURL?: string;
-  pageDescription?: string|null|undefined;
+  pageDescription?: string| null;
 }) => {
   return (
     <>

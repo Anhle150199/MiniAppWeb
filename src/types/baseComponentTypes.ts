@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -7,6 +7,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   onClick: () => void;
   children?: React.ReactNode;
+}
+export interface ObjectCommon {
+  [key: string] : string;
 }
 
 export interface ToolInfomation {
@@ -23,22 +26,15 @@ export interface ToolInfomation {
   markdown?: string;
 }
 
-
-export type ToolsInfoDataType = {
-  GeneratorTools: GeneratorToolsType;
-  TextTools: TextToolsType
+export interface ToolCategory {
+  Name: string;
+  Tools: { [key: string]: ToolInfomation };
 }
 
-export type GeneratorToolsType = {
-  GuidGenerator: ToolInfomation;
-  name: string;
+export interface ToolsInfoDataType {
+  [category: string]: ToolCategory;
 }
 
-export type TextToolsType = {
-  name: string;
-  TextFormatter: ToolInfomation;
-  ToSlug: ToolInfomation;
-}
 export type Text2SlugParams = {
   text: string;
   typeCase: number;

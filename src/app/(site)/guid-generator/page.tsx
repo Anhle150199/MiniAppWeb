@@ -3,7 +3,7 @@ import { GuidGenerator } from "@/components/Tools/GuidGenerator";
 import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
 import { Metadata } from "next";
-const GuidGeneratorInfo = ToolsInfoData.GeneratorTools.GuidGenerator;
+const GuidGeneratorInfo = ToolsInfoData.GeneratorTools.Tools.GuidGenerator;
 const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + GuidGeneratorInfo.link;
 
 const GenerateMetadata = (toolInfo: ToolInfomation) => {

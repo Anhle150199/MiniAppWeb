@@ -1,7 +1,6 @@
 import fs from "fs";
 import matter from "gray-matter";
 import { join } from "path";
-import markdownToHtml from "./markdownToHtml";
 
 import MarkdownIt from 'markdown-it';
 
@@ -16,7 +15,7 @@ export function getMarkdownPostByPath(markdownPath: string| undefined|null) {
   if(!markdownPath) return null;
   const fullPath = join(postsDirectory, markdownPath);
   const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
+  const { content } = matter(fileContents);
   return md.render(content);
 }
 

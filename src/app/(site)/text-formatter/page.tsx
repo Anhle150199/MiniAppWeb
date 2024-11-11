@@ -5,7 +5,7 @@ import { ToolsInfoData } from "@/mocks/toolsInfo";
 import { ToolInfomation } from "@/types/baseComponentTypes";
 import { getMarkdownPostByPath } from "@/utils/markdown";
 import { Metadata } from "next";
-const TextFormatterInfo = ToolsInfoData.TextTools.TextFormatter;
+const TextFormatterInfo = ToolsInfoData.TextTools.Tools.TextFormatter;
 const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + TextFormatterInfo.link;
 const GenerateMetadata = (toolInfo: ToolInfomation) => {
   return {
@@ -67,7 +67,7 @@ const post =  getMarkdownPostByPath(TextFormatterInfo.markdown);
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Breadcrumb pageName={TextFormatterInfo.pageName} pageDescription={ToolsInfoData.TextTools.name} />
+      <Breadcrumb pageName={TextFormatterInfo.pageName} pageDescription={ToolsInfoData.TextTools.Name} />
       <TextFormatter />
       <PostMarkdown content={post ?? ""} />
     </main>

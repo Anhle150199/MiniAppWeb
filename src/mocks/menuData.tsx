@@ -10,32 +10,32 @@ const menuData: Menu[] = [
   },
   {
     id: 2,
-    title: ToolsInfoData.GeneratorTools.name,
+    title: ToolsInfoData.GeneratorTools.Name,
     newTab: false,
     submenu: [
       {
-        id: ToolsInfoData.GeneratorTools.GuidGenerator.id,
-        title: ToolsInfoData.GeneratorTools.GuidGenerator.name,
-        path: ToolsInfoData.GeneratorTools.GuidGenerator.link,
+        id: ToolsInfoData.GeneratorTools.Tools.GuidGenerator.id,
+        title: ToolsInfoData.GeneratorTools.Tools.GuidGenerator.name,
+        path: ToolsInfoData.GeneratorTools.Tools.GuidGenerator.link,
         newTab: false,
       },
     ],
   },
   {
     id: 3,
-    title: ToolsInfoData.TextTools.name,
+    title: ToolsInfoData.TextTools.Name,
     newTab: false,
     submenu: [
       {
-        id: ToolsInfoData.TextTools.TextFormatter.id,
-        title: ToolsInfoData.TextTools.TextFormatter.name,
-        path: ToolsInfoData.TextTools.TextFormatter.link,
+        id: ToolsInfoData.TextTools.Tools.TextFormatter.id,
+        title: ToolsInfoData.TextTools.Tools.TextFormatter.name,
+        path: ToolsInfoData.TextTools.Tools.TextFormatter.link,
         newTab: false,
       },
       {
-        id: ToolsInfoData.TextTools.ToSlug.id,
-        title: ToolsInfoData.TextTools.ToSlug.name,
-        path: ToolsInfoData.TextTools.ToSlug.link,
+        id: ToolsInfoData.TextTools.Tools.ToSlug.id,
+        title: ToolsInfoData.TextTools.Tools.ToSlug.name,
+        path: ToolsInfoData.TextTools.Tools.ToSlug.link,
         newTab: false,
       },
     ],

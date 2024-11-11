@@ -6,7 +6,7 @@ import { ToolInfomation } from "@/types/baseComponentTypes";
 import { Text2Slug } from "@/utils/clientHelper";
 import { getMarkdownPostByPath } from "@/utils/markdown";
 import { Metadata } from "next";
-const Text2SlugInfo = ToolsInfoData.TextTools.ToSlug;
+const Text2SlugInfo = ToolsInfoData.TextTools.Tools.ToSlug;
 const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN+Text2SlugInfo.link;
 const GenerateMetadata = (toolInfo: ToolInfomation) => {
   return {
@@ -68,7 +68,7 @@ const URLSlugConverterPage = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Breadcrumb pageName={Text2SlugInfo.pageName} parentPage={ToolsInfoData.TextTools.name} pageDescription={metadata.description} />
+      <Breadcrumb pageName={Text2SlugInfo.pageName} parentPage={ToolsInfoData.TextTools.Name} pageDescription={metadata.description} />
       <TextConvertter  functionHandler = {Text2Slug}/>
       <PostMarkdown content={post ?? ""} />
     </main>
