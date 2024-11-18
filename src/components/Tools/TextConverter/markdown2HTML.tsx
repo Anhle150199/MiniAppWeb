@@ -41,11 +41,11 @@ export const Markdown2HTMLConverter = () => {
 
   return (
     <section
-      className="bg-gray-1 pb-8 pt-2 dark:bg-dark-2 lg:pb-[70px] lg:pt-[20px]"
+      className="bg-gray-1 pb-6 pt-2 dark:bg-dark-2 lg:pb-[70px] lg:pt-[20px]"
     >
       <div className="container">
         <div className="wow fadeInUp" data-wow-delay=".2s">
-          <div className="-mx-4 flex flex-wrap items-start mb-10">
+          <div className="-mx-4 flex flex-wrap items-start mb-6">
             <div className="w-full px-4 lg:w-1/2">
               <div className="mb-12  lg:mb-0">
                 <div className="w-full flex flex-wrap justify-between items-center">
@@ -92,7 +92,6 @@ export const Markdown2HTMLConverter = () => {
               </div>
             </div>
           </div>
-          <hr />
         </div>
       </div>
 
