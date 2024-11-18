@@ -5,6 +5,7 @@ import { copyToClipboard, downloadTxtFile } from "@/utils/clientHelper";
 import { Button, TextArea } from "@/components/Common/BaseComponent";
 
 import MarkdownIt from 'markdown-it';
+import HtmlPreview from "@/components/Common/PreviewHTML";
 
 const md = new MarkdownIt();
 
@@ -83,7 +84,7 @@ export const Markdown2HTMLConverter = () => {
                   </div>
                 </div>
                 <div className="w-full h-96 overflow-auto p-2 px-2 sm:px-4 lg:px-2 xl:px-4 py-2 rounded-lg border-2 border-gray-300">
-                  {isPreview ?<div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }} dangerouslySetInnerHTML={{ __html: outputText }} />
+                  {isPreview ? <HtmlPreview htmlContent={outputText} />
                   :<pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                     <code>{outputText}</code>
                   </pre>}
