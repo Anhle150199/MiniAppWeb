@@ -14,7 +14,6 @@ export const ToolsInfoData: ToolsInfoDataType = {
         title: "Free GUID/UUID Generator and Validator Online  - Create Unique Identifiers",
         description: 'Generate and validate GUIDs (Globally Unique Identifiers) with customizable options. Learn more about GUIDs, their uniqueness, and their uses in software development.',
         keywords: ['guid', 'uuid', 'GUID generator', 'guid gen', 'uuid gen', 'UUID generator', 'guid creator', 'uuid creator', 'bulk GUID generation', 'uuid guid generator', 'GUID validator', 'Globally Unique Identifier', 'generate GUIDs online', 'validate GUIDs'],
-
       },
     }
   },

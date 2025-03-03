@@ -1,47 +1,29 @@
-import { TeamType } from "@/types/team";
-import SectionTitle from "../Common/SectionTitle";
-import SingleTool from "./SingleTool";
+import Link from "next/link";
 
-const teamData: TeamType[] = [
-  {
-    id: 1,
-    name: "GUID Generator",
-    designation: "Fast and free bulk GUID generator and validator for all your needs",
-    image: "/images/logo/guid-generator.webp",
-    link: "/guid-generator"
-  },
-  {
-    id: 2,
-    name: "Text Formatter ",
-    designation: "Free online tool for quick text formatting, case conversion, and cleanup.",
-    image: "/images/logo/text-formatter.webp",
-    link: "/text-formatter"
-  }
-];
-
-const ToolsList = () => {
+const ToolsList = ({ ToolsInfoGroup }: { ToolsInfoGroup: any }) => {
   return (
-    <section
-      id="ToolsList"
-      className="overflow-hidden bg-gray-1 pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]"
-    >
-      <div className="container">
-        <div className="mb-[60px]">
-          <SectionTitle
-            title="Quick Tools for Every Need"
-            paragraph="Get quick access to essential tools that streamline your tasks. Fast, easy-to-use, and accessible anytime you need them."
-            width="640px"
-            center
-          />
-        </div>
-
-        <div className="-mx-4 flex flex-wrap justify-center">
-          {teamData.map((team, i) => (
-            <SingleTool key={i} team={team} />
-          ))}
-        </div>
+    <div className="mb-[60px]">
+      <div className="mb-4 text-2xl font-bold text-dark dark:text-white sm:text-2xl md:text-[30px] md:leading-[1.2]">
+        <h1>{ToolsInfoGroup.Name}</h1>
       </div>
-    </section>
+      <div className="-mx-4 grid gap-4 px-4 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {Object.keys(ToolsInfoGroup.Tools).map(
+          (keyTool: string, index: number) => {
+            const toolInfo = ToolsInfoGroup.Tools[keyTool];
+            return (
+                <Link href={toolInfo.link} key={toolInfo.id}>
+                  <div className="h-full border-spacing-1 cursor-pointer rounded-xl bg-primary/80 px-3 py-4 text-lg font-bold text-white shadow-4 hover:bg-primary">
+                    <span>{toolInfo.name}</span>
+                    <p className="mt-2 text-sm font-light">
+                      {toolInfo.summary}
+                    </p>
+                  </div>
+                </Link>
+            );
+          },
+        )}
+      </div>
+    </div>
   );
 };
 
