@@ -7,6 +7,7 @@ const GuidGeneratorInfo = ToolsInfoData.GeneratorTools.Tools.GuidGenerator;
 const path = process.env.NEXT_PUBLIC_CURRENT_DOMAIN + GuidGeneratorInfo.link;
 
 const GenerateMetadata = (toolInfo: ToolInfomation) => {
+
   return {
     title: toolInfo.title,
     description: toolInfo.description,
@@ -16,10 +17,11 @@ const GenerateMetadata = (toolInfo: ToolInfomation) => {
     },
     robots: toolInfo.robots ?? "index, follow",
     openGraph: {
-      type: 'website',
+      type: "website",
       url: path,
       title: toolInfo.title,
       description: toolInfo.description,
+      siteName: process.env.NEXT_PUBLIC_NAME,
       images: [
         {
           url: process.env.NEXT_PUBLIC_CURRENT_DOMAIN + toolInfo.image,
@@ -29,9 +31,16 @@ const GenerateMetadata = (toolInfo: ToolInfomation) => {
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      // site: "@your_twitter_handle", // Thay bằng Twitter của bạn nếu có
+      title: toolInfo.title,
+      description: toolInfo.description,
+      image: process.env.NEXT_PUBLIC_CURRENT_DOMAIN + toolInfo.image,
+    },
+  };
+};
 
-  }
-}
 const GenerateStructuredData = async ({ title, path, description, applicationCategory }: { title: string, path: string, description: string, applicationCategory?: string })=> {
   return {
     "@context": "https://schema.org",

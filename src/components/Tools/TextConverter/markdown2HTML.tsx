@@ -21,7 +21,7 @@ export const Markdown2HTMLConverter = () => {
   }
   // functions
   const onChangeInputText = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (event.target.value.length > 10000) return;
+    if (event.target.value.length > 10000000) return;
     setInput(event.target.value)
   }
 
