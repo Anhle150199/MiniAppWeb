@@ -10,7 +10,7 @@ export const ToolsInfoData: ToolsInfoDataType = {
         pageName: "Free Online GUID Generator Tool",
         summary: "Fast and free bulk GUID generator and validator for all your needs",
         image: "/images/logo/guid-generator.webp",
-        link: "/guid-generator",
+        link: "/generator-tools/guid-generator",
         title: "GUID Generator Online – Free & Secure UUID Generator",
         description: 'Generate and validate GUIDs (UUIDs) online for free. Instantly create unique identifiers with customizable options. No installation required. Try now!',
         keywords: ["guid generator", "uuid generator", "generate guid online",
