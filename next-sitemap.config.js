@@ -7,6 +7,7 @@ module.exports = {
     '/server-sitemap.xml', 
     '/admin*',
     '/api*',
+    '/error*',
     '/404',
     '/500'
   ],
