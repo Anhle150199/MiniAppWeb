@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_CURRENT_DOMAIN || 'https://minitoolhub.org',
+  siteUrl: process.env.NEXT_PUBLIC_CURRENT_DOMAIN ?? 'https://minitoolhub.org',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   exclude: [
@@ -19,7 +19,7 @@ module.exports = {
       },
     ],
     additionalSitemaps: [
-      `${process.env.SITE_URL}/sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_CURRENT_DOMAIN}/sitemap.xml`,
     ],
   },
 };

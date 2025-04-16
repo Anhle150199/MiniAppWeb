@@ -7,4 +7,3 @@ Host: https://minitoolhub.org
 
 # Sitemaps
 Sitemap: https://minitoolhub.org/sitemap.xml
-Sitemap: undefined/sitemap.xml
