@@ -14,9 +14,9 @@
 |---------|-------------|
 | **Flexible Input** | Accepts commas, semicolons, or line breaks as separators |
 | **Calculate instantly** | Calculate instantly with every change you make in your spending list. |
-| **Visual Analytics (Pro)** | Interactive charts showing cost distribution |
-| **Export Reports** | Download as Excel/PDF for records or sharing |
-| **History Tracking** | Auto-saves previous calculations |
+| **Visual Analytics (Pro version - Developing)** | Interactive charts showing cost distribution |
+| **Export Reports (Pro version - Developing)** | Download as Excel/PDF for records or sharing |
+| **History Tracking (Pro version - Developing)** | Auto-saves previous calculations |
 
 ## 📊 Why Choose Split Money?
 - ⏱ **Saves 90% time** vs manual calculations
