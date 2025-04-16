@@ -3,7 +3,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
-// import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import "bootstrap-icons/font/bootstrap-icons.css"; // Import bootstrap CSS
 import "../styles/index.css";
@@ -33,22 +32,31 @@ export default function RootLayout({
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-8K8SYFY5HP" ></script>
 
-        <Script id={"Google-Tag"} dangerouslySetInnerHTML={{
+        <Script
+          id="Google-Tag"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-PPQDZN9B"
+        />
+        <Script
+          id="Google-Tag-Init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PPQDZN9B');
-          ` }} />
+})(window,document,'script','dataLayer','GTM-PPQDZN9B');`,
+          }}
+        />
         <Script id={"Google-GA1"} dangerouslySetInnerHTML={{
-            __html: `  window.dataLayer = window.dataLayer || [];
+          __html: `  window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
           gtag('config', 'G-8K8SYFY5HP');
           ` }}
         />
-        <Script id={"Google-GA2"} 
+        <Script id={"Google-GA2"}
           dangerouslySetInnerHTML={{
             __html: `gtag('event', 'conversion', {
                 'send_to': 'AW-16715802845/XYJ5COCA3doZEN3R26I-',

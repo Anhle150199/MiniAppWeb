@@ -220,7 +220,7 @@ export default function SplitMoneyTool() {
               {transactions.map((t, i) => (
                 <li key={i} className="p-2 bg-gray-50 rounded dark:bg-gray-700 dark:text-gray-300">
                   <span className="font-medium dark:text-gray-100">{t.from}</span> should pay{' '}
-                  <span className="font-medium dark:text-gray-100">{t.to}</span>{' '}
+                  <span className="font-medium dark:text-gray-100">{t.to}</span>{': '}
                   <span className="font-bold dark:text-gray-100">
                     {t.amount.toLocaleString('en', { minimumFractionDigits: 2 })}
                   </span>
