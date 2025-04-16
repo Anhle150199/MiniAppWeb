@@ -32,11 +32,11 @@ export default function RootLayout({
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-8K8SYFY5HP" ></script>
 
-        <Script
+        {/* <Script
           id="Google-Tag"
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtm.js?id=GTM-PPQDZN9B"
-        />
+        /> */}
         <Script
           id="Google-Tag-Init"
           strategy="afterInteractive"
