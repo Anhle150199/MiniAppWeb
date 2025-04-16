@@ -85,6 +85,33 @@ export const ToolsInfoData: ToolsInfoDataType = {
         markdown: "/MarkdownToHTML/guide.md"
       }
     }
-
-  }
+  },
+  CalculateTools: {
+    Name: "Calculate Tools",
+    Tools: {
+      SplitMoney: {
+        id: 30,
+        name: "Split Money",
+        summary: "Quickly split money between people.",
+        image: "/images/logo/split-money.webp",
+        title: `Split Money - Smart Group Expense Calculator | Split Bills Easily - ${process.env.NEXT_PUBLIC_NAME}`,
+        link: "/calculate-tools/split-money",
+        pageName: "Split Money Tool",
+        description: `Easily split money among friends, family, or colleagues with our free online Split Money tool. Perfect for group outings, shared expenses, and more. Try it now!`,
+        keywords: [
+          "split money calculator",
+          "money splitter",
+          "expense sharing tool",
+          "split bill calculator",
+          "group expense calculator",
+          "cost sharing tool",
+          "money division tool",
+          "shared expenses calculator",
+          "bill splitting tool",
+          "online money splitter"
+        ],
+        markdown: "/CalculateTools/SplitMoney.md",
+      },
+    }
+  },
 }

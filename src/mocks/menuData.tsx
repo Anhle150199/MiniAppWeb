@@ -47,6 +47,19 @@ const menuData: Menu[] = [
     ],
   },
   {
+    id: 3,
+    title: ToolsInfoData.CalculateTools.Name,
+    newTab: false,
+    submenu: [
+      {
+        id: ToolsInfoData.CalculateTools.Tools.SplitMoney.id,
+        title: ToolsInfoData.CalculateTools.Tools.SplitMoney.name,
+        path: ToolsInfoData.CalculateTools.Tools.SplitMoney.link,
+        newTab: false,
+      },
+    ],
+  },
+  {
     id: 999,
     title: "About",
     path: "/about",
